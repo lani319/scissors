@@ -11,12 +11,8 @@
 </head>
 
 <body>
-   
- 
-    <div id="app">
-        
+   <div id="app">
         <div class="row">
-            
             <div class="small-5 columns text-center">
                 <img
                 v-if = "myChoice != null" 
@@ -29,10 +25,17 @@
                 <h1 class="text-center"><strong>YOU</strong></h1>
             </div>
             <div class="small-2 columns text-center">
-                <h1 style="font-size:100px;"><strong>{{ gameCount }}</strong></h1>
+                <h1 style="font-size:100px;"><strong>{{ count }}</strong></h1>
             </div>
             <div class="small-5 columns text-center">
-                <img src="images/question.jpg" alt="" class="text-center">
+                <img
+                v-if = "comChoice != null" 
+                v-bind:src="'images/'+ comChoice +'.jpg'" class="text-center">
+                <img
+                v-else 
+                src="images/question.jpg " class="text-center">
+               
+
                 <h1 class="text-center"><strong>Computer</strong></h1>
             </div>
         </div>
@@ -74,8 +77,7 @@
                         <div class="text-center">
                             <button class="start-btn" @click="startGame()">선택 완료!</button>
 
-                            {{ myChoice }}
-
+                          
                         </div>
                         <div class="loading"> 기다리는 중...</div>
                     </div>
