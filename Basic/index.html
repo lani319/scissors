@@ -43,16 +43,25 @@
         <div class="row">
             <div class="small-6 columns text-center">
                 <div class="battle-wrap">
-                    <img src="./images/heart.jpg" class="heart" alt="">
-                    <img src="./images/heart.jpg" class="heart" alt="">
-                    <img src="./images/heart.jpg" class="heart" alt="">
+                    <img 
+                    v-for="value in lifeOfMe" 
+                    src="./images/heart.jpg" class="heart" alt="">
+                    <img 
+                    v-for="value in 3- lifeOfMe" 
+                    src="./images/broken-heart.jpg" class="heart" alt="">
+                    
                 </div>
             </div>
             <div class="small-6 columns text-center">
                 <div class="battle-wrap">
-                    <img src="./images/heart.jpg" class="heart" alt="">
-                    <img src="./images/heart.jpg" class="heart" alt="">
-                    <img src="./images/heart.jpg" class="heart" alt="">
+                    <img 
+                    v-for = "value in lifeOfCom" 
+                    src="./images/heart.jpg" class="heart" alt="">
+                    <img 
+                    v-for="value in 3-lifeOfCom" 
+                    src="./images/broken-heart.jpg" class="heart" alt="">
+                    
+                    
                 </div>
             </div>
         </div>
@@ -74,16 +83,13 @@
                 </div>
                 <div class="row">
                     <div class="small-12 columns">
-                        <div class="text-center">
-                            <button class="start-btn" @click="startGame()">선택 완료!</button>
-
-                          
-                        </div>
-                        <div class="loading"> 기다리는 중...</div>
+                        <div class="text-center" v-if="isSelectable">
+                            <button class="start-btn" @click="startGame()">선택 완료!</button></div>
+                        <div class="loading" v-else> 기다리는 중...</div>
                     </div>
                 </div>
             </div>
-            <div class="small-6 columns text-center">
+            <div class="small-6 columns text-center" v-if="isThinkable">
                 <p>생각 중...</p>
             </div>
         </div>
@@ -91,9 +97,14 @@
         <div class="row">
             <div class="small-12 columns log">
                 <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li v-bind:class="{
+                        'win-log' : logdata.winner ==='me' ,  
+                        'defeat-log' : logdata.winner ==='com' ,  
+                        'draw-log' : logdata.winner ==='draw' ,  
+                    
+                    }"
+                    v-for = "logdata in logs" > {{ logdata.message }} </li>
+                    
                 </ul>
             </div>
         </div>
